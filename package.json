@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc src/index.ts && node build/index.js"
+    "start": "node build/index.js",
+    "build": "tsc api/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^2.15.1",
     "axios": "^1.4.0",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
