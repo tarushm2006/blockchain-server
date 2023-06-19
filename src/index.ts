@@ -1,6 +1,8 @@
 
 const express = require("express");
-const{ getVouchers }= require("./getVoucher");
+const{ getVouchers } = require("./getVoucher");
+const { placeOrder } = require("./placeOrder");
+const { getOrder } = require("./getOrderDetails");
 const { response } = require("./response");
 
 let productList = response;
@@ -29,13 +31,30 @@ app.get("/getVouchers",(req: any,res: any)=>{
      }
   }
   res.send(newResponse);
+});
+
+app.post("/placeOrder",async(req: any,res: any)=>{
+  if(!req.query.po || !req.query.id || !req.query.email || !req.query.denomination){
+    res.status(400); 
+    res.send("Incomplete request");
+  } else {
+  const data = await placeOrder(req.query.id,req.query.quantity,req.query.email,req.query.po,req.query.denomination);
+  console.log(data);
+  res.send(data);
+  }
+})
+
+app.get("/orderDetails",async(req: any,res: any)=>{
+ if(!req.query.orderId){
+  res.status(400);
+  res.send("Invalid request");
+ }else {
+  let data = await getOrder(req.query.orderId,req.query.po);
+  res.send(data);
+ }
 })
 
 
 app.listen(3000, ()=>{
     console.log("The app is live on port 3000");
 })
-
-
-
-//getVouchers("India");
