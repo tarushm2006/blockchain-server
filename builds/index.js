@@ -8,16 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const { getVouchers } = require("./getVoucher");
 const { placeOrder } = require("./placeOrder");
 const { getOrder } = require("./getOrderDetails");
 const { response } = require("./response");
 let productList = response;
-exports.default = (req, res) => {
-    res.send("The server is live");
-};
 const app = express();
 //This would be called automatically at 7:35 am and 7:35 pm GMT
 app.post("/refreshVouchers", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,6 +23,9 @@ app.post("/refreshVouchers", (req, res) => __awaiter(void 0, void 0, void 0, fun
     res.send("Data refreshed succesfully");
     console.log("Fetched data succesfully");
 }));
+app.get("/", (req, res) => {
+    res.send("the server is live");
+});
 //This would be called by the app to get the Products
 app.get("/getVouchers", (req, res) => {
     let newResponse = [];

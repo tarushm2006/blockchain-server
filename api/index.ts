@@ -3,14 +3,8 @@ const { getVouchers } = require("./getVoucher");
 const { placeOrder } = require("./placeOrder");
 const { getOrder } = require("./getOrderDetails");
 const { response } = require("./response");
-import { VercelRequest, VercelResponse } from "@vercel/node";
 
 let productList = response;
-
-export default (req: VercelRequest, res: VercelResponse): void => {
-  res.send("The server is live");
-};
-
 const app = express();
 
 //This would be called automatically at 7:35 am and 7:35 pm GMT
@@ -20,6 +14,10 @@ app.post("/refreshVouchers", async (req: { country: string }, res: any) => {
   productList = data;
   res.send("Data refreshed succesfully");
   console.log("Fetched data succesfully");
+});
+
+app.get("/", (req: any, res: any) => {
+  res.send("the server is live");
 });
 
 //This would be called by the app to get the Products
