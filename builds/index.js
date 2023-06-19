@@ -16,7 +16,7 @@ const { getOrder } = require("./getOrderDetails");
 const { response } = require("./response");
 let productList = response;
 exports.default = (req, res) => {
-    res.json({ name: "Johne", email: "john@example.com" });
+    res.send("The server is live");
 };
 const app = express();
 //This would be called automatically at 7:35 am and 7:35 pm GMT
